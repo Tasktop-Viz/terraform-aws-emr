@@ -82,11 +82,11 @@ module "emr_instance_fleet" {
       },
       {
         bid_price_as_percentage_of_on_demand_price = 100
-        ebs_config = {
-          size                 = 64
+        ebs_config = [{
+          size                 = 256
           type                 = "gp3"
           volumes_per_instance = 1
-        }
+        }]
         instance_type     = "c5.xlarge"
         weighted_capacity = 2
       },
@@ -117,11 +117,11 @@ module "emr_instance_fleet" {
       },
       {
         bid_price_as_percentage_of_on_demand_price = 100
-        ebs_config = {
-          size                 = 64
+        ebs_config = [{
+          size                 = 256
           type                 = "gp3"
           volumes_per_instance = 1
-        }
+        }]
         instance_type     = "c5.xlarge"
         weighted_capacity = 2
       }
@@ -146,10 +146,11 @@ module "emr_instance_fleet" {
   list_steps_states                 = ["PENDING", "RUNNING", "CANCEL_PENDING", "CANCELLED", "FAILED", "INTERRUPTED", "COMPLETED"]
   log_uri                           = "s3://${module.s3_bucket.s3_bucket_id}/"
 
-  scale_down_behavior    = "TERMINATE_AT_TASK_COMPLETION"
-  step_concurrency_level = 3
-  termination_protection = false
-  visible_to_all_users   = true
+  scale_down_behavior        = "TERMINATE_AT_TASK_COMPLETION"
+  step_concurrency_level     = 3
+  termination_protection     = false
+  unhealthy_node_replacement = true
+  visible_to_all_users       = true
 
   tags = local.tags
 }
@@ -192,6 +193,14 @@ module "emr_instance_group" {
     }
   ])
 
+  #  Example placement group config for multiple primary node clusters
+  #  placement_group_config = [
+  #    {
+  #      instance_role      = "MASTER"
+  #      placement_strategy = "SPREAD"
+  #    }
+  #  ]
+
   master_instance_group = {
     name           = "master-group"
     instance_count = 1
@@ -210,11 +219,11 @@ module "emr_instance_group" {
     instance_type  = "c5.xlarge"
     bid_price      = "0.1"
 
-    ebs_config = {
-      size                 = 64
+    ebs_config = [{
+      size                 = 256
       type                 = "gp3"
       volumes_per_instance = 1
-    }
+    }]
     ebs_optimized = true
   }
 
@@ -322,7 +331,7 @@ module "vpc_endpoints_sg" {
 
 module "s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   bucket_prefix = "${local.name}-"
 

@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.0](https://github.com/terraform-aws-modules/terraform-aws-emr/compare/v2.1.0...v2.2.0) (2024-08-03)
+
+
+### Features
+
+* Support interactive configuration block for EMR serverless application ([#27](https://github.com/terraform-aws-modules/terraform-aws-emr/issues/27)) ([2e7045e](https://github.com/terraform-aws-modules/terraform-aws-emr/commit/2e7045e99ee36bb93be4036388f01bbf4fcdbcdd))
+
+## [2.1.0](https://github.com/terraform-aws-modules/terraform-aws-emr/compare/v2.0.0...v2.1.0) (2024-05-04)
+
+
+### Features
+
+* Reset default value of s3_bucket_arns to empty ([#23](https://github.com/terraform-aws-modules/terraform-aws-emr/issues/23)) ([d8d79df](https://github.com/terraform-aws-modules/terraform-aws-emr/commit/d8d79df4dfe1c590c369ebb939a9e262de6cd42a))
+
+## [2.0.0](https://github.com/terraform-aws-modules/terraform-aws-emr/compare/v1.2.2...v2.0.0) (2024-04-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* Add support for placement group config and unhealthy node replacement; raise AWS provider MSV to v5.44 (#21)
+
+### Features
+
+* Add support for placement group config and unhealthy node replacement; raise AWS provider MSV to v5.44 ([#21](https://github.com/terraform-aws-modules/terraform-aws-emr/issues/21)) ([eff2018](https://github.com/terraform-aws-modules/terraform-aws-emr/commit/eff2018e7aeffdd260c21b9251275fa8342c34de))
+
+## [1.2.2](https://github.com/terraform-aws-modules/terraform-aws-emr/compare/v1.2.1...v1.2.2) (2024-03-07)
+
+
+### Bug Fixes
+
+* Update CI workflow versions to remove deprecated runtime warnings ([#18](https://github.com/terraform-aws-modules/terraform-aws-emr/issues/18)) ([faf4d0b](https://github.com/terraform-aws-modules/terraform-aws-emr/commit/faf4d0bfc218bc70d2124bed5e52780bb0856c2d))
+
+### [1.2.1](https://github.com/terraform-aws-modules/terraform-aws-emr/compare/v1.2.0...v1.2.1) (2024-02-08)
+
+
+### Bug Fixes
+
+* Add `"deletecollection"` verb to `"persistentvolumeclaims"` Kubernetes RBAC permission ([#17](https://github.com/terraform-aws-modules/terraform-aws-emr/issues/17)) ([668f09b](https://github.com/terraform-aws-modules/terraform-aws-emr/commit/668f09bcb2eb3dbac1be59648f00a4a7acbf832f))
+
 ## [1.2.0](https://github.com/terraform-aws-modules/terraform-aws-emr/compare/v1.1.3...v1.2.0) (2023-07-21)
 
 
