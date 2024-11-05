@@ -331,6 +331,7 @@ resource "aws_emr_cluster" "this" {
     ignore_changes = [
       kerberos_attributes, # Since the API does not return the actual values for Kerberos configurations
       step,                # Ignore outside changes to running cluster steps
+      core_instance_fleet[0].target_on_demand_capacity, # Ignore changes to target_on_demand_capacity inside core_instance_fleet
     ]
   }
 }
@@ -408,7 +409,7 @@ resource "aws_emr_instance_fleet" "this" {
 
   lifecycle {
     ignore_changes = [
-      target_spot_capacity,
+      target_spot_capacity,target_on_demand_capacity,
     ]
   }
 }
