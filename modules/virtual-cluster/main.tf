@@ -134,7 +134,7 @@ resource "kubernetes_role_binding_v1" "this" {
 
   role_ref {
     kind      = "Role"
-    name      = local.role_name
+    name      = "emr-containers"
     api_group = "rbac.authorization.k8s.io"
   }
 }
