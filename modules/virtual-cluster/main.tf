@@ -106,7 +106,13 @@ resource "kubernetes_role_v1" "this" {
   rule {
     api_groups = [""]
     resources  = ["persistentvolumeclaims"]
-    verbs      = ["get", "list", "watch", "describe", "create", "edit", "delete", "annotate", "patch", "label", "deletecollection"]
+    verbs      = ["get", "list", "watch", "describe", "create", "edit", "delete", "deletecollection", "annotate", "patch", "label"]
+  }
+
+  rule {
+    api_groups = ["scheduling.volcano.sh"]
+    resources  = ["podgroups"]
+    verbs      = ["get", "list", "watch", "create", "delete", "update"]
   }
 }
 
