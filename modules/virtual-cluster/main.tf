@@ -312,7 +312,7 @@ resource "kubernetes_service_account" "emr_containers" {
     name      = var.service_account_emr
     namespace = local.namespace
     annotations = {
-      "eks.amazonaws.com/role-arn" = aws_iam_role.thisthis[count.index].arn
+      "eks.amazonaws.com/role-arn" = aws_iam_role.this[count.index].arn
     }
   }
 }
