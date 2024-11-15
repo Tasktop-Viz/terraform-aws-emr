@@ -153,7 +153,7 @@ data "aws_iam_policy_document" "assume" {
 
     principals {
       type        = "Service"
-      identifiers = ["elasticmapreduce.${data.aws_partition.current.dns_suffix}"]
+      identifiers = ["elasticmapreduce.${data.aws_partition.current.dns_suffix}", "emr-containers.amazonaws.com"]
     }
   }
 
