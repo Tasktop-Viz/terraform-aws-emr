@@ -76,6 +76,12 @@ variable "oidc_provider_arn" {
   default     = ""
 }
 
+variable "cluster_oidc_id" {
+  description = "OIDC provider for the EKS cluster"
+  type        = string
+  default     = ""
+}
+
 variable "s3_bucket_arns" {
   description = "S3 bucket ARNs for EMR on EKS job execution role to list, get objects, and put objects"
   type        = list(string)
@@ -162,4 +168,13 @@ variable "cloudwatch_log_group_skip_destroy" {
   description = "Set to 'true' if you do not wish the log group (and any logs it may contain) to be deleted at destroy time, and instead just remove the log group from the Terraform state"
   type        = bool
   default     = null
+}
+
+
+################################################################################
+# Service Account
+################################################################################
+variable "service_account_emr" {
+  description = "Service account for EMR EKS"
+  type        = string
 }

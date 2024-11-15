@@ -187,6 +187,24 @@ data "aws_iam_policy_document" "assume" {
       values   = ["sts.amazonaws.com"]
     }
   }
+
+  # New Statement for OIDC with Web Identity
+  statement {
+    sid     = "OIDCAssumeRole"
+    effect  = "Allow"
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+
+    principals {
+      type        = "Federated"
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${var.cluster_oidc_id}"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "${var.cluster_oidc_id}:sub"
+      values   = ["system:serviceaccount:${var.namespace}:${var.service_account_emr}"]
+    }
+  }
 }
 
 data "aws_iam_policy_document" "this" {
@@ -283,4 +301,18 @@ resource "aws_cloudwatch_log_group" "this" {
   skip_destroy      = var.cloudwatch_log_group_skip_destroy
 
   tags = local.tags
+}
+
+
+################################################################################
+# Service Account
+################################################################################
+resource "kubernetes_service_account" "emr_containers" {
+  metadata {
+    name      = var.service_account_emr
+    namespace = local.namespace
+    annotations = {
+      "eks.amazonaws.com/role-arn" = aws_iam_role.this.arn
+    }
+  }
 }
