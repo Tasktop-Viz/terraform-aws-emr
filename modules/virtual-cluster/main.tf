@@ -66,7 +66,6 @@ resource "kubernetes_role_v1" "this" {
     resources  = ["namespaces"]
     verbs      = ["get"]
   }
-
   rule {
     api_groups = [""]
     resources  = ["serviceaccounts", "services", "configmaps", "events", "pods", "pods/log"]
@@ -106,7 +105,7 @@ resource "kubernetes_role_v1" "this" {
   rule {
     api_groups = [""]
     resources  = ["persistentvolumeclaims"]
-    verbs      = ["get", "list", "watch", "describe", "create", "edit", "delete", "deletecollection", "annotate", "patch", "label"]
+    verbs      = ["create", "list", "delete", "deletecollection"]
   }
 
   rule {
