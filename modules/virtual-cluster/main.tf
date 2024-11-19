@@ -105,7 +105,7 @@ resource "kubernetes_role_v1" "this" {
   rule {
     api_groups = [""]
     resources  = ["persistentvolumeclaims"]
-    verbs      = ["create", "list", "delete", "deletecollection"]
+    verbs      = ["get", "list", "watch", "describe", "create", "edit", "delete", "deletecollection", "annotate", "patch", "label"]
   }
 
   rule {
