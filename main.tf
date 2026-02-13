@@ -332,6 +332,7 @@ resource "aws_emr_cluster" "this" {
       kerberos_attributes, # Since the API does not return the actual values for Kerberos configurations
       step,                # Ignore outside changes to running cluster steps
       core_instance_fleet[0].target_on_demand_capacity, # Ignore changes to target_on_demand_capacity inside core_instance_fleet
+      os_release_label, # Ignore AWS-assigned OS version to prevent forced cluster replacement
     ]
   }
 }
