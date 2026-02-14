@@ -282,6 +282,7 @@ resource "aws_emr_cluster" "this" {
   }
 
   name                   = var.name
+  os_release_label       = var.os_release_label
   release_label          = try(coalesce(var.release_label, element(data.aws_emr_release_labels.this[0].release_labels, 0)), "")
   scale_down_behavior    = var.scale_down_behavior
   security_configuration = var.create_security_configuration ? aws_emr_security_configuration.this[0].name : var.security_configuration_name
@@ -332,7 +333,6 @@ resource "aws_emr_cluster" "this" {
       kerberos_attributes, # Since the API does not return the actual values for Kerberos configurations
       step,                # Ignore outside changes to running cluster steps
       core_instance_fleet[0].target_on_demand_capacity, # Ignore changes to target_on_demand_capacity inside core_instance_fleet
-      os_release_label, # Ignore AWS-assigned OS version to prevent forced cluster replacement
     ]
   }
 }
