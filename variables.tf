@@ -140,6 +140,12 @@ variable "release_label" {
   default     = null
 }
 
+variable "os_release_label" {
+  description = "Amazon Linux release label for the OS image used by the EMR cluster. If not set, AWS assigns the latest available version at cluster creation time"
+  type        = string
+  default     = null
+}
+
 variable "release_label_filters" {
   description = "Map of release label filters use to lookup a release label"
   type        = any
